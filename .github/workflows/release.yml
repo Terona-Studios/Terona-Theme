@@ -1,0 +1,38 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Version
+        id: version
+        run: |
+          DATE=$(date +%Y.%m.%d)
+          RUN_NUMBER=${{ github.run_number }}
+          VERSION="v${DATE}.${RUN_NUMBER}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Generated version: ${VERSION}"
+
+      - name: Zip terona-theme
+        run: |
+          zip -r terona-theme.zip terona-theme/ -x "terona-theme/.git/*" "terona-theme/node_modules/*" "terona-theme/.env*"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: "Release ${{ steps.version.outputs.version }}"
+          body: "Automated release of terona-theme"
+          files: terona-theme.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
