@@ -15,7 +15,7 @@
                             <p class="text-base/60 max-w-md text-lg">Your cart is empty. Browse our products and add something great!</p>
                         </div>
                         <div class="pt-4">
-                            <a href="{{ route('products.index') }}" wire:navigate>
+                            <a href="{{ route('home') }}" wire:navigate>
                                 <x-button.primary class="px-8 py-3 flex items-center gap-2">
                                     <x-ri-shopping-bag-line class="size-5" />
                                     {{ __('product.continue_shopping') ?? 'Continue Shopping' }}
@@ -95,7 +95,7 @@
                                 }
                             @endphp
 
-                            <a href="{{ route('products.checkout', $routeParams) }}" wire:navigate>
+                            <a href="{{ route('products.show', $item->product) }}" wire:navigate>
                                 <x-button.primary class="h-fit whitespace-nowrap flex items-center gap-2">
                                     <x-ri-edit-line class="size-4" />
                                     {{ __('product.edit') }}
