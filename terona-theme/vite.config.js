@@ -12,7 +12,7 @@ export default defineConfig({
         path.resolve(__dirname, 'js/easymde-entry.js'),
         'resources/css/filament/admin/theme.css',
       ],
-      buildDirectory: 'sleek/',
+      buildDirectory: 'terona-theme/',
       refresh: true,
     }),
     tailwindcss(),
