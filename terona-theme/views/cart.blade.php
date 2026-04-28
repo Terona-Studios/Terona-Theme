@@ -95,7 +95,7 @@
                                 }
                             @endphp
 
-                            <a href="{{ route('products.show', $item->product) }}" wire:navigate>
+                            <a href="{{ route('products.show', [$item->product->category, $item->product]) }}" wire:navigate>
                                 <x-button.primary class="h-fit whitespace-nowrap flex items-center gap-2">
                                     <x-ri-edit-line class="size-4" />
                                     {{ __('product.edit') }}
